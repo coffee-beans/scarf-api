@@ -1,0 +1,8 @@
+{
+  "name": "scraf-api",
+  "description": "a fine piece of art",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.x"
+  }
+}
