@@ -36,6 +36,7 @@ describe('A locationService', function(){
 			//in other words if weather.json gets passed back successfully, you should be able to print that out 
 		});
 
+
 		describe('and receives a valid response', function(){
 
 			it('should properly format the weather json as scarf json', function(){
