@@ -11,7 +11,10 @@ describe('A locationService', function(){
 	});
 
 	it('should throw an error if invalid latitude', function(){
-
+		var service = new LocationService();
+		expect(function(){
+			service.setLatitude(3123); //invalid latitude
+		}).toThrowError("errorName");
 	});
 
 	it('should throw an error if invalid longitude', function(){
