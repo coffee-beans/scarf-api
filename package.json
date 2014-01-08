@@ -2,8 +2,19 @@
   "name": "scarf-api",
   "description": "a fine piece of art",
   "version": "0.0.1",
+  "contributors": [
+  	{
+	  	"name": "Zainab Ebrahimi",
+	  	"email": ""
+  	},
+  	{
+	  	"name": "Jabari Bell",
+	  	"email": "jabari.bell@pxlflu.net"
+  	}
+  ],
   "dependencies": {
     "express": "3.x",
 	"jasmine-node" : "*"
-  }
+  },
+  "repository": "https://github.com/coffee-beans/scarf-api"
 }
