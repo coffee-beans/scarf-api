@@ -1,5 +1,9 @@
 // spec for service that returns required data from selected weather api
 
+var locationServiceModule = require('../locationService');
+    //LocatiionServiceTest = locationServiceModule.LocationService();
+
+
 describe('A locationService', function(){
 
 	it('should have a valid latitude', function(){
