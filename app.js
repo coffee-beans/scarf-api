@@ -5,9 +5,10 @@
 var express = require('express');
 var app = express();
 
-app.get('/:loc', function(request, response){
+app.get('/location/', function(request, response){
 	
-	httpRequest(request.params.loc);
+	//httpRequest(request.params.loc);
+	console.log(request.query.lat, request.query.lon);
 	response.type('text/json');
 	response.send('Awesome Coffee Beans');
 });
