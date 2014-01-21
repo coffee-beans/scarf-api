@@ -7,8 +7,7 @@ var app = express();
 
 app.get('/location/', function(request, response){
 	
-	//httpRequest(request.params.loc);
-	console.log(request.query.lat, request.query.lon);
+	//httpRequest(request.query.lat, request.query.long);
 	response.type('text/json');
 	response.send('Awesome Coffee Beans');
 });

@@ -8,8 +8,9 @@
 //  Copyright (c) 2014 coffee.beans. All rights reserved.
 //
 
-var module = require('../locationService');
-    //fixture = require('./wu-ny-location-data.json');
+var module  = require('../locationService'),
+    weatherFixture = require('./fixtures/wu-ny-location-data');
+    //scarfFixture = require('./fixtures/scarf-format');
 
 describe('A locationService', function(){
 
@@ -61,24 +62,53 @@ describe('A locationService', function(){
 		var service = new module.LocationService(40.685517, -73.947554),
 		    pathUrl = service.getPath();
 		expect(pathUrl).toBe('/api/ab1bd54f3fb269da/conditions/q/40.685517,-73.947554.json');
-	});		
+	});
+	
+	it('should have a scraf obj defined', function(){
+		var service = new module.LocationService(40.685517, -73.947554),
+		    scarf = service.getScarf();
+		expect(scarf).toBeDefined();
+	});
 
 	describe('makes a request to an api', function(){
 
-		it('should handle a valid response', function(){
-			//in other words if weather.json gets passed back successfully, you should be able to print that out 
-		});
-
 		describe('and receives a valid response', function(){
 
-			it('should properly format the weather json as scarf json', function(){
-				//so when the weather.json comes back, test that your service parses it to the format that you specified in that ticket
+			it('should properly set should wear scarf', function(){
+				var service = new module.LocationService(40.685517, -73.947554),
+				    shouldWearScarf = service.getShouldWearScarf(weatherFixture.weatherFixture);
+				expect(shouldWearScarf).toBe(false);
 			});
 
+			it('should properly set display location', function(){
+				var service = new module.LocationService(40.685517, -73.947554),
+				    displayLocation = service.getDisplayLocation(weatherFixture.weatherFixture);
+				expect(displayLocation).toBe('Brooklyn, NY');
+			});
+			
+			it('should properly set average speed in mph', function(){
+				var service = new module.LocationService(40.685517, -73.947554),
+				    avgWindSpeedMph = service.getAvgWindMph(weatherFixture.weatherFixture);
+				expect(avgWindSpeedMph).toBe(3.0);
+			});
+		
+			it('should properly set average speed in kph', function(){
+				var service = new module.LocationService(40.685517, -73.947554),
+                                    avgWindSpeedKph = service.getAvgWindKph(weatherFixture.weatherFixture);
+                                expect(avgWindSpeedKph).toBe(4.8);
+			});
+			/*it('should properly format the weather json as scarf json', function(){
+				var service = new module.LocationService(40.685517, -73.947554),
+				    scarf = service.formatScarf(weatherFixture);
+				expect(scarf).toBe(scarfFixture);		
+			});*/
+
 		});
+		describe('and receives an invalid response', function(){
 
-		it('should throw an error if there is an invalid response', function(){
+			it('should return an error message', function(){
 
+			});
 		});
 
 	});
