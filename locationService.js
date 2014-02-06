@@ -12,6 +12,16 @@ var LocationService = function(lat, long) {
 	this.apiKey = 'ab1bd54f3fb269da';
 	this.endPoint = 'conditions';
 	this.path = this.setPath();
+	this.scarf = {
+		success: null,
+        	data: {
+			should_wear_scarf : null,
+			average_wind_speed : {
+			   mph: null,
+			   kph: null
+			}
+        	}
+	};
 	
 };
 LocationService.prototype.setLatitude = function(latitude){
@@ -71,6 +81,32 @@ LocationService.prototype.httpRequest = function() {
 	    };
 	
 	http.request(options, callback).end();
+};
+
+LocationService.prototype.getScarf = function(){
+	return this.scarf;
+};
+
+LocationService.prototype.getShouldWearScarf = function(response){
+	var wind_min = response.current_observation.wind_mph,
+	    wind_max = response.current_observation.wind_gust_mph;
+	return (wind_min + wind_max)/2 > 15 ? true : false;
+};
+
+LocationService.prototype.getDisplayLocation = function(response){
+	return response.current_observation.display_location.full;
+};
+
+LocationService.prototype.getAvgWindMph = function(response){
+	var wind_min = response.current_observation.wind_mph,
+            wind_max = response.current_observation.wind_gust_mph;	  
+	return (wind_min + wind_max)/2;
+};
+
+LocationService.prototype.getAvgWindKph = function(response){
+	var wind_min = response.current_observation.wind_kph,
+            wind_max = response.current_observation.wind_gust_kph;
+        return (wind_min + wind_max)/2;
 };
 
 module.exports.LocationService = LocationService;
